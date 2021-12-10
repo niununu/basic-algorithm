@@ -11,7 +11,7 @@ else:
     os.system("git clone {} {}".format(catche2Link, catch2Dir))
 
 buildDir = "{}/build".format(rootFold)
-if Path(buildDir).is_dir():
+if not Path(buildDir).is_dir():
     os.makedirs(buildDir)
 
 os.chdir(buildDir)
