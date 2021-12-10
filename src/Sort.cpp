@@ -122,7 +122,7 @@ std::vector<int> Chain::sortFun(std::vector<int> input)
                     }
                 }
 
-                if (iter->next = nullptr)
+                if (iter->next == nullptr)
                 {
                     iter->next = nodeChain;
                     nodeChain->before = iter;
