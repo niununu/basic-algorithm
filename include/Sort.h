@@ -2,18 +2,42 @@
 #include <vector>
 #include <memory>
 
-class SortBase
+class SortBase : public std::enable_shared_from_this<SortBase>//Sort from small to large
 {
 public:
     virtual std::vector<int> sortFun(std::vector<int> input) = 0;
 
-    void swapFun(int &a, int &b)
+    template <class T> void swapFun(T &a, T &b)
     {
         auto tmp = a;
         a = b;
-        b = a;
+        b = tmp;
     }
 };
+using SortBasePtr = std::shared_ptr<SortBase>;
+
+// class Proxy : public SortBase, public std::enable_shared_from_this<Proxy>
+// {
+// public:
+//     std::vector<int> sortFun(std::vector<int> input) override
+//     {
+//         if (mSortBasePtr)
+//         {
+//             return mSortBasePtr->sortFun(input);
+//         }
+//         else
+//         {
+//             return input;
+//         }
+//     }
+
+//     void setSortPtr(SortBasePtr ptr)
+//     {
+//         mSortBasePtr = ptr;
+//     }
+// private:
+//     SortBasePtr mSortBasePtr;
+// };
 
 class Buddle : public SortBase, public std::enable_shared_from_this<Buddle>
 {
@@ -43,4 +67,13 @@ private:
         std::shared_ptr<Node> before{nullptr};
     };
     using nodePtr = std::shared_ptr<Node>;
+};
+
+class Heap : public SortBase, public std::enable_shared_from_this<Heap>
+{
+public:
+    std::vector<int> sortFun(std::vector<int> input) override;
+
+private:
+    void siftDown(int i, std::vector<int>& input);
 };

@@ -4,16 +4,14 @@
 
 std::vector<int> Buddle::sortFun(std::vector<int> input)
 {
-    for (auto i = 0; i < input.size(); ++i)
+    int size = input.size();
+    for (auto i = 0; i < size; ++i)
     {
-        for (auto j = 0; j + 1 < input.size() - i; ++j)
+        for (auto j = 0; j + 1 < size - i; ++j)
         {
             if (input[j] > input[j + 1])
             {
-                // SortBase::swapFun(input[j], input[j + 1]);
-                int a = input[j];
-                input[j] = input[j + 1];
-                input[j + 1] = a;
+                SortBase::swapFun(input[j], input[j + 1]);
             }
         }
     }
@@ -49,16 +47,12 @@ void Quick::quickSort(int left, int right, std::vector<int> &mInput)
 
         if (i < j)
         {
-            // swapFun(mInput[i], mInput[j]);
-            int a = mInput[i];
-            mInput[i] = mInput[j];
-            mInput[j] = a;
+            swapFun(mInput[i], mInput[j]);
         }
     }
 
-    // swapFun(mInput[left], mInput[i]);
-    mInput[left] = mInput[i];
-    mInput[i] = tmp;
+    swapFun(mInput[left], mInput[i]);
+
     quickSort(left, i - 1, mInput);
     quickSort(i + 1, right, mInput);
 }
@@ -137,4 +131,69 @@ std::vector<int> Chain::sortFun(std::vector<int> input)
     }
 
     return output;
+}
+
+std::vector<int> Heap::sortFun(std::vector<int> input)
+{
+    int size = input.size();
+    // create heap
+    for (int i = size/2; i >= 0; --i)
+    {
+        siftDown(i, input);
+        std::cout << "[" << i << "] : ";
+        for (const auto& o : input)
+        {
+            std::cout << o << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::vector<int> output;
+    for (int i = size - 1; i >= 0; --i)
+    {
+        output.push_back(input[0]);
+        swapFun(input[i], input[0]);
+        siftDown(0, input);
+    }
+    
+    return output;
+}
+
+void Heap::siftDown(int i, std::vector<int>& input)
+{
+    auto size = (int)input.size();
+    bool ok = false;
+    while(2 * i < size && !ok)
+    {
+
+    // }
+    // for (; i < input.size(); ++i)
+    // {
+		int index = i;
+        // if (2 * i < input.size())
+        {
+            if (input[i] < input[2*i])
+            {
+                index = 2*i;
+            }
+        }
+
+        if ((2*i + 1) < size)
+        {
+            if (input[i] < input[2*i + 1])
+            {
+                index = 2*i + 1;
+            }
+        }
+
+        if (index != i)
+        {
+            swapFun(input[index], input[i]);
+            i = index;
+        }
+        else
+        {
+            ok = true;
+        }
+    }
 }
