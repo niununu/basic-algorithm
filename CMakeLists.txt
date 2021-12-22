@@ -19,8 +19,7 @@ add_subdirectory("tests")
 file(GLOB SOURCES 
     src/Sort.cpp
     src/Search.cpp
-    include/Sort.h
-    include/Search.h
+    include/*
 )
 
 add_library(unit_test_lib ${SOURCES})
