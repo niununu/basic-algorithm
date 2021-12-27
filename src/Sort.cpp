@@ -5,13 +5,16 @@
 std::vector<int> Buddle::sortFun(std::vector<int> input)
 {
     int size = input.size();
-    for (auto i = 0; i < size; ++i)
+    bool flag = true;
+    for (auto i = 0; i < size && flag; ++i)
     {
+        flag = false;
         for (auto j = 0; j + 1 < size - i; ++j)
         {
             if (input[j] > input[j + 1])
             {
                 SortBase::swapFun(input[j], input[j + 1]);
+                flag = true;
             }
         }
     }

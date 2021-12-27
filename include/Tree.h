@@ -16,25 +16,18 @@ public:
     BiTreePtr createTree(std::vector<int> nums)
     {
         BiTreePtr rootNode;
-        for (int i = 0; i < (int)nums.size(); ++i)
-        {
-            auto node = _createTreeNode(nums[i]);
-            if (i + 1 < nums.size())
-            {
-                node->lchild = _createTreeNode(nums[i + 1]);
-                ++i;
-            }
-            if (i + 1 < nums.size())
-            {
-                node->rchild = _createTreeNode(nums[i + 2]);
-                ++i;
-            }
 
-            if (!rootNode)
-            {
-                rootNode = node;
-            }
-        }
+        // int data = 0;
+        // auto _createTreeNode = [data](BiTreePtr& node){
+        //     node->data = data;
+        // };
+        // // for (int i = 0; i < (int)nums.size(); ++i)
+        // for (const auto& num : nums)
+        // {
+        //     BiTreePtr node;
+        //     data = num;
+        //     _createTreeNode(node)
+        // }
 
         return rootNode;
     }

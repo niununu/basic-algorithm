@@ -42,10 +42,10 @@ namespace SortTest
             sortTest(std::make_shared<Buddle>());
         }
 
-        SECTION("Heap Sort")
-        {
-            sortTest(std::make_shared<Heap>());
-        }
+        // SECTION("Heap Sort")
+        // {
+        //     sortTest(std::make_shared<Heap>());
+        // }
         // auto output = sort->sortFun(input);
         // isSameOrderVector(output, expectResult);
     }
